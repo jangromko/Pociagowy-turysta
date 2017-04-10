@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #mapa {
+      height: 960px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+<div id="mapa"></div>
+
+<script>
+
+      function initMap() {
+
+          var klucz = 'AIzaSyBpXvsFn3qL2eaMdpWQeW-o5DQoPpkngAI'
+          var szukaj = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+          var lacznik = 'PL&key='
+
+          var srodek = {lat: 52, lng: 19.5};
+          var mapa = new google.maps.Map(document.getElementById('mapa'), {
+              zoom: 7,
+              center: srodek
+          });
+
+          $.getJSON('http://localhost:3000/mapa/json', function (rozklad) {
+              for (var i in rozklad)
+              {
+                  $.getJSON(szukaj+i+lacznik+klucz, function (dane) {
+                      var miasto = {lat: dane.results[0].geometry.location.lat, lng: dane.results[0].geometry.location.lng}
+
+                      var marker = new google.maps.Marker({
+                          position: miasto,
+                          map: mapa
+                      });
+                  });
+              }
+          });
+
+
+      }
+
+
+</script>
+
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpXvsFn3qL2eaMdpWQeW-o5DQoPpkngAI&callback=initMap">
+</script>
+
+<script>
+  initMap()
+</script>
+
+</body>
+</html>
