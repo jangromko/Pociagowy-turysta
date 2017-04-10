@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6fac1b9-b8f0-449f-99c0-7d3de7f6a758" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Development__Pocigowy_turysta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Production__Pocigowy_turysta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/spec__Pocigowy_turysta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/test__Pocigowy_turysta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-    </list>
+    <list default="true" id="e6fac1b9-b8f0-449f-99c0-7d3de7f6a758" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -535,12 +528,12 @@
       <updated>1491739753787</updated>
       <workItem from="1491739755298" duration="19545000" />
       <workItem from="1491819135696" duration="770000" />
-      <workItem from="1491853505496" duration="7340000" />
+      <workItem from="1491853505496" duration="7565000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27655000" />
+    <option name="totallyTimeSpent" value="27880000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
