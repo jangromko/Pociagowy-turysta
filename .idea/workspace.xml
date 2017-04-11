@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6fac1b9-b8f0-449f-99c0-7d3de7f6a758" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/mapa/index.html.erb" afterPath="$PROJECT_DIR$/app/views/mapa/index.html.erb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,8 +43,8 @@
       <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/mapa/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+            <state relative-caret-position="99">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -61,6 +59,16 @@
         <option value="Erb File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>odjazd</find>
+      <find>przyjazd</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>przyj</replace>
+      <replace>odj</replace>
+    </replaceStrings>
   </component>
   <component name="GeneratorOptions">
     <option name="VCS_SHOW_CONFIRMATION" value="true" />
@@ -80,6 +88,7 @@
         <option value="$PROJECT_DIR$/app/views/mapa/json.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/mapa_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json" />
         <option value="$PROJECT_DIR$/app/views/mapa/index.html.erb" />
       </list>
     </option>
@@ -310,7 +319,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Pulpit/rozklad_dla_calej_polski.json" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
   </component>
   <component name="RecentsManager">
@@ -533,12 +542,12 @@
       <updated>1491739753787</updated>
       <workItem from="1491739755298" duration="19545000" />
       <workItem from="1491819135696" duration="770000" />
-      <workItem from="1491853505496" duration="24525000" />
+      <workItem from="1491853505496" duration="29545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44840000" />
+    <option name="totallyTimeSpent" value="49860000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -744,10 +753,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/mapa_controller.rb">
+    <entry file="file://$USER_HOME$/Pulpit/rozklad_dla_calej_polski.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555516">
+          <caret line="0" column="4796852" lean-forward="false" selection-start-line="0" selection-start-column="4796852" selection-end-line="0" selection-end-column="4796852" />
           <folding />
         </state>
       </provider>
@@ -760,18 +777,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json">
+    <entry file="file://$PROJECT_DIR$/app/controllers/mapa_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="162">
+          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/mapa/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+        <state relative-caret-position="99">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
       </provider>

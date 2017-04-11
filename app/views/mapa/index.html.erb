@@ -4,8 +4,8 @@
 <head>
   <style>
     #mapa {
-      height: 960px;
-      width: 960px;
+      height: 100%;
+      width: 100%;
     }
 
     html, body {
@@ -16,16 +16,18 @@
 
     #floating-panel {
       position: absolute;
-      top: 10px;
-      left: 25%;
+      margin-top: 20px;
+      left: 40%;
       z-index: 5;
-      background-color: #fff;
-      padding: 5px;
-      border: 1px solid #999;
       text-align: center;
       font-family: 'Roboto', 'sans-serif';
-      line-height: 30px;
-      padding-left: 10px;
+    }
+
+    #przycisk {
+      padding: 10px;
+      background-color: #ffffff;
+      font-size: 1.5rem;
+      border-radius: 8px;
     }
 
   </style>
@@ -33,7 +35,7 @@
 <body>
 
 <div id="floating-panel">
-  <input onclick="pokazWszystkie();" type=button value="Wyczyść">
+  <input id="przycisk" onclick="pokazWszystkie();" type=button value="Wyczyść">
 </div>
 <div id="mapa"></div>
 
@@ -43,6 +45,10 @@
     var szukaj = 'https://maps.googleapis.com/maps/api/geocode/json?address='
     var lacznik = '+PL&key='
     var mapa;
+    var polaczenia = {}
+    var znaczniki = {}
+    var x = 0
+    var miasta = []
 
     function initMap()
     {
@@ -52,10 +58,8 @@
             center: srodek
         });
 
-        znaczniki = {}
-        x = 0
-        miasta = []
-        polaczenia_z_wybranym_miastem = {}
+
+
         $.getJSON('http://localhost:3000/mapa/json', function (rozklad)
         {
             for (var i in rozklad)
@@ -64,11 +68,6 @@
                 {
                     miasto = {lat: dane.results[0].geometry.location.lat, lng: dane.results[0].geometry.location.lng}
                     nazwa = dane.results[0].address_components[0].long_name
-                    if (nazwa == '31')
-                    {
-                        console.log(dane)
-                        console.log(szukaj + i + lacznik + klucz)
-                    }
                     znaczniki[nazwa] = new google.maps.Marker({
                         position: miasto,
                         map: mapa,
@@ -78,44 +77,57 @@
                     znaczniki[dane.results[0].address_components[0].long_name].addListener('click', function ()
                     {
                         ustawDlaWszystkich(null);
+                        przywrocNazwy();
                         znaczniki[dane.results[0].address_components[0].long_name].setMap(mapa);
                         znaczniki[dane.results[0].address_components[0].long_name].setAnimation(google.maps.Animation.BOUNCE);
-
 
 
                         for (var i in znaczniki)
                         {
                             if (i == dane.results[0].address_components[0].long_name)
                             {
-                                var info_rozklad = ""
 
                                 for (var stacja in rozklad[i])
                                 {
                                     if (stacja != undefined)
                                     {
-
+                                        console.log(stacja)
                                         if (rozklad[i][stacja] != undefined)
                                         {
-                                            for (var j=0; j<rozklad[i][stacja].length; j++)
+                                            for (var j = 0; j < rozklad[i][stacja].length; j++)
                                             {
                                                 if (rozklad[i][stacja][j] != undefined)
                                                 {
+                                                    if (polaczenia[rozklad[i][stacja][j].miastoDocelowe] == undefined)
+                                                    {
+                                                        polaczenia[rozklad[i][stacja][j].miastoDocelowe] = rozklad[i][stacja][j].miastoDocelowe;
+                                                    }
+
+                                                    var info = "\n" + stacja + ' [' + rozklad[i][stacja][j].odj + ']' +' => ' + rozklad[i][stacja][j].stacjaDocelowa + ' [' + rozklad[i][stacja][j].przyj + ']';
+                                                    polaczenia[rozklad[i][stacja][j].miastoDocelowe] += info;
 
                                                     if (znaczniki[rozklad[i][stacja][j].miastoDocelowe] != undefined)
                                                     {
                                                         znaczniki[rozklad[i][stacja][j].miastoDocelowe].setMap(mapa)
+                                                        var info = rozklad[i][stacja][j].odj
+                                                        console.log(info)
+
+                                                        znaczniki[rozklad[i][stacja][j].miastoDocelowe].setTitle(znaczniki[rozklad[i][stacja][j].miastoDocelowe].getTitle + info);
                                                     }
 
                                                 }
 
                                             }
                                         }
-                                        }
+                                    }
 
 
+                                }
 
 
-
+                                for (var p in polaczenia)
+                                {
+                                    znaczniki[p].setTitle(polaczenia[p]);
                                 }
                             }
                             else
@@ -124,12 +136,6 @@
                             }
                         }
 
-
-                        for (var m in polaczenia_z_wybranym_miastem)
-                        {
-                            znaczniki[m].setTitle(polaczenia_z_wybranym_miastem[m])
-                            console.log(m + "XXXXXX")
-                        }
 
                     });
 
@@ -147,14 +153,24 @@
         for (var i in znaczniki)
         {
             znaczniki[i].setMap(mapa);
-            znaczniki[i].setTitle(i);
         }
     }
 
 
     function pokazWszystkie()
     {
-        ustawDlaWszystkich(mapa)
+        ustawDlaWszystkich(mapa);;
+        przywrocNazwy();
+    }
+
+
+    function przywrocNazwy()
+    {
+        for (var i in znaczniki)
+        {
+            znaczniki[i].setTitle(i);
+            polaczenia = {}
+        }
     }
 
 
