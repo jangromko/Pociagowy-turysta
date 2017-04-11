@@ -5,51 +5,156 @@
   <style>
     #mapa {
       height: 960px;
-      width: 100%;
+      width: 960px;
     }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #floating-panel {
+      position: absolute;
+      top: 10px;
+      left: 25%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+
   </style>
 </head>
 <body>
 
-
+<div id="floating-panel">
+  <input onclick="pokazWszystkie();" type=button value="Wyczyść">
+</div>
 <div id="mapa"></div>
 
 <script>
 
     var klucz = 'AIzaSyBpXvsFn3qL2eaMdpWQeW-o5DQoPpkngAI'
     var szukaj = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-    var lacznik = 'PL&key='
+    var lacznik = '+PL&key='
+    var mapa;
 
-    function initMap() {
-        var srodek = {lat: 52, lng: 19.5};
-        var mapa = new google.maps.Map(document.getElementById('mapa'), {
+    function initMap()
+    {
+        var srodek = {lat: 52, lng: 19};
+        mapa = new google.maps.Map(document.getElementById('mapa'), {
             zoom: 7,
             center: srodek
         });
 
         znaczniki = {}
         x = 0
-        $.getJSON('http://localhost:3000/mapa/json', function (rozklad) {
+        miasta = []
+        polaczenia_z_wybranym_miastem = {}
+        $.getJSON('http://localhost:3000/mapa/json', function (rozklad)
+        {
             for (var i in rozklad)
             {
-                $.getJSON(szukaj+i+lacznik+klucz, function (dane) {
+                $.getJSON(szukaj + i + lacznik + klucz, function (dane)
+                {
                     miasto = {lat: dane.results[0].geometry.location.lat, lng: dane.results[0].geometry.location.lng}
                     nazwa = dane.results[0].address_components[0].long_name
+                    if (nazwa == '31')
+                    {
+                        console.log(dane)
+                        console.log(szukaj + i + lacznik + klucz)
+                    }
                     znaczniki[nazwa] = new google.maps.Marker({
                         position: miasto,
                         map: mapa,
                         title: nazwa
                     });
 
-                    znaczniki[dane.results[0].address_components[0].long_name].addListener('click', function() {
-                        alert(dane.results[0].address_components[0].long_name)
+                    znaczniki[dane.results[0].address_components[0].long_name].addListener('click', function ()
+                    {
+                        ustawDlaWszystkich(null);
+                        znaczniki[dane.results[0].address_components[0].long_name].setMap(mapa);
+                        znaczniki[dane.results[0].address_components[0].long_name].setAnimation(google.maps.Animation.BOUNCE);
+
+
+
+                        for (var i in znaczniki)
+                        {
+                            if (i == dane.results[0].address_components[0].long_name)
+                            {
+                                var info_rozklad = ""
+
+                                for (var stacja in rozklad[i])
+                                {
+                                    if (stacja != undefined)
+                                    {
+
+                                        if (rozklad[i][stacja] != undefined)
+                                        {
+                                            for (var j=0; j<rozklad[i][stacja].length; j++)
+                                            {
+                                                if (rozklad[i][stacja][j] != undefined)
+                                                {
+
+                                                    if (znaczniki[rozklad[i][stacja][j].miastoDocelowe] != undefined)
+                                                    {
+                                                        znaczniki[rozklad[i][stacja][j].miastoDocelowe].setMap(mapa)
+                                                    }
+
+                                                }
+
+                                            }
+                                        }
+                                        }
+
+
+
+
+
+                                }
+                            }
+                            else
+                            {
+                                //znaczniki[i].setMap(null)
+                            }
+                        }
+
+
+                        for (var m in polaczenia_z_wybranym_miastem)
+                        {
+                            znaczniki[m].setTitle(polaczenia_z_wybranym_miastem[m])
+                            console.log(m + "XXXXXX")
+                        }
+
                     });
+
+                    miasta[nazwa] = miasto
 
                 });
             }
         });
 
 
+    }
+
+    function ustawDlaWszystkich(mapa)
+    {
+        for (var i in znaczniki)
+        {
+            znaczniki[i].setMap(mapa);
+            znaczniki[i].setTitle(i);
+        }
+    }
+
+
+    function pokazWszystkie()
+    {
+        ustawDlaWszystkich(mapa)
     }
 
 

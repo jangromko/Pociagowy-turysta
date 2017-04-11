@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6fac1b9-b8f0-449f-99c0-7d3de7f6a758" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/mapa/index.html.erb" afterPath="$PROJECT_DIR$/app/views/mapa/index.html.erb" />
     </list>
@@ -13,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Pociągowy turysta@Development__Pocigowy_turysta.coverage" NAME="Development: Pociągowy turysta Coverage Results" MODIFIED="1491860923643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Pociągowy turysta" />
+    <SUITE FILE_PATH="coverage/Pociągowy turysta@Development__Pocigowy_turysta.coverage" NAME="Development: Pociągowy turysta Coverage Results" MODIFIED="1491885032124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Pociągowy turysta" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -44,8 +45,8 @@
       <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/mapa/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+            <state relative-caret-position="116">
+              <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -309,7 +310,8 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -531,12 +533,12 @@
       <updated>1491739753787</updated>
       <workItem from="1491739755298" duration="19545000" />
       <workItem from="1491819135696" duration="770000" />
-      <workItem from="1491853505496" duration="13847000" />
+      <workItem from="1491853505496" duration="24525000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34162000" />
+    <option name="totallyTimeSpent" value="44840000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -548,7 +550,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="1055" extended-state="1" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25614974" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -758,10 +760,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Dokumenty/VI semestr/GiS/Projekt/rozklad_dla_calej_polski.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/mapa/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+        <state relative-caret-position="116">
+          <caret line="89" column="53" lean-forward="false" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
           <folding />
         </state>
       </provider>
