@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html>
 <head>
   <style>
@@ -11,40 +12,45 @@
 <body>
 
 
-
-
 <div id="mapa"></div>
 
 <script>
 
-      function initMap() {
+    var klucz = 'AIzaSyBpXvsFn3qL2eaMdpWQeW-o5DQoPpkngAI'
+    var szukaj = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+    var lacznik = 'PL&key='
 
-          var klucz = 'AIzaSyBpXvsFn3qL2eaMdpWQeW-o5DQoPpkngAI'
-          var szukaj = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-          var lacznik = 'PL&key='
+    function initMap() {
+        var srodek = {lat: 52, lng: 19.5};
+        var mapa = new google.maps.Map(document.getElementById('mapa'), {
+            zoom: 7,
+            center: srodek
+        });
 
-          var srodek = {lat: 52, lng: 19.5};
-          var mapa = new google.maps.Map(document.getElementById('mapa'), {
-              zoom: 7,
-              center: srodek
-          });
+        znaczniki = {}
+        x = 0
+        $.getJSON('http://localhost:3000/mapa/json', function (rozklad) {
+            for (var i in rozklad)
+            {
+                $.getJSON(szukaj+i+lacznik+klucz, function (dane) {
+                    miasto = {lat: dane.results[0].geometry.location.lat, lng: dane.results[0].geometry.location.lng}
+                    nazwa = dane.results[0].address_components[0].long_name
+                    znaczniki[nazwa] = new google.maps.Marker({
+                        position: miasto,
+                        map: mapa,
+                        title: nazwa
+                    });
 
-          $.getJSON('http://localhost:3000/mapa/json', function (rozklad) {
-              for (var i in rozklad)
-              {
-                  $.getJSON(szukaj+i+lacznik+klucz, function (dane) {
-                      var miasto = {lat: dane.results[0].geometry.location.lat, lng: dane.results[0].geometry.location.lng}
+                    znaczniki[dane.results[0].address_components[0].long_name].addListener('click', function() {
+                        alert(dane.results[0].address_components[0].long_name)
+                    });
 
-                      var marker = new google.maps.Marker({
-                          position: miasto,
-                          map: mapa
-                      });
-                  });
-              }
-          });
+                });
+            }
+        });
 
 
-      }
+    }
 
 
 </script>
@@ -55,7 +61,7 @@
 </script>
 
 <script>
-  initMap()
+    initMap()
 </script>
 
 </body>
