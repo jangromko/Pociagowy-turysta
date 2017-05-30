@@ -40,7 +40,7 @@ class AlgorytmController < ApplicationController
     mrowy = []
 
 
-    for j in 0..1
+    for j in 0..20
 
       if sztywne_ustawienia
         for i in 0..20
@@ -66,7 +66,6 @@ class AlgorytmController < ApplicationController
           najlepsza_trasa = mrowa.trasa
           kiedy_znaleziona = j
 
-
         end
         print mrowa.koszt
         print ':'
@@ -87,6 +86,10 @@ class AlgorytmController < ApplicationController
       puts najlepszy_koszt
       puts '–––––––––––––––––––'
 
+
+      if najlepszy_koszt < czas_zwiedzania*99+28000
+        break
+      end
 
 #=begin
       graf.odparuj(0.05)
@@ -126,6 +129,10 @@ class AlgorytmController < ApplicationController
 
     File.open('/home/jg/Pulpit/wynik.json', "w") do |plik_wyj|
       plik_wyj.puts wynik_json.to_json
+    end
+
+    File.open('/home/jg/Pulpit/wynik_koszt', "w") do |plik_wyj|
+      plik_wyj.puts (najlepszy_koszt/1440).to_s + ' dni ' + ((najlepszy_koszt-(najlepszy_koszt/1440)*1440)/60).to_s + ' godzin(y) ' + ((najlepszy_koszt-(najlepszy_koszt/1440)*1440)%60).to_s + ' minut(y)'
     end
 
     render 'pokaz_wynik'

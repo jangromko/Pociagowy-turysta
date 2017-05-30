@@ -51,7 +51,7 @@
         for (var i in podroz)
         {
             var li = document.createElement("li");
-            var polaczenie = document.createTextNode('Z: ' + podroz[i]['stacja_poczatkowa'] + ' [' + na_ludzki_czas(podroz[i]['odjazd']) + '] -> do: ' + podroz[i]['stacja_docelowa'] + ' [' + na_ludzki_czas(podroz[i]['przyjazd']) + ']');
+            var polaczenie = document.createTextNode('Z: ' + podroz[i]['stacja_poczatkowa'] + ' [' + na_ludzki_czas(podroz[i]['odjazd']) + '] -> do: ' + podroz[i]['stacja_docelowa'] + ' [' + na_ludzki_czas(podroz[i]['przyjazd']) + '], pociąg: ' + podroz[i]['pociag']);
             li.appendChild(polaczenie);
             document.getElementById("lista").appendChild(li);
         }
@@ -61,7 +61,7 @@
   <p></p>
 </div>
 <div class="w3-col l8 m8 s12">
-  <div class="tytul">Wyznaczona trasa:</div>
+  <div class="tytul">Wyznaczona trasa (<%= IO.read('/home/jg/Pulpit/wynik_koszt')%>):</div>
   <ul id="lista">
   </ul>
 
