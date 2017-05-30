@@ -3,7 +3,7 @@ load 'trasa.rb'
 
 class Mrowka
 
-  def initialize(start, rozmiar_grafu, graf)
+  def initialize(start, rozmiar_grafu, graf, czas_zwiedzania)
     @start = start
     # @trasa = []
     # @trasa_ogolna = []
@@ -19,6 +19,7 @@ class Mrowka
     # @aktualny_czas = 0
     @r = Random.new
     @trasa_bufor = Trasa.new
+    @czas_zwiedzania = czas_zwiedzania
 
 
     @wierzcholki = []
@@ -117,16 +118,42 @@ class Mrowka
           @koszt += kandydat.czas + ile_czekania(@aktualny_czas, kandydat.odjazd)
           @aktualny_czas = (@aktualny_czas + ile_czekania(@aktualny_czas, kandydat.odjazd) + kandydat.czas)%1440
           unless @odwiedzone.include? @obecny_wierzcholek
-            @koszt += 30
-            @aktualny_czas = (@aktualny_czas + 30)%1440
+            @koszt += @czas_zwiedzania
+            @aktualny_czas = (@aktualny_czas + @czas_zwiedzania)%1440
 
 
-            if @trasa_bufor.trasa_szczegoly.size == 1
+            if @trasa_bufor.trasa_szczegoly.size <= 1
               @trasa.dolacz_trase(@trasa_bufor)
               @trasa_bufor.wyczysc
             else
+              #@trasa.dolacz_trase(@trasa_bufor)
+              #@trasa_bufor.wyczysc
+
+              buf_start = @trasa.trasa_szczegoly.last.miasto_docelowe
+
+              for i in (@trasa_bufor.trasa_szczegoly.size-2).downto 0
+
+                if buf_start == @trasa_bufor.trasa_szczegoly[i].miasto_docelowe
+                  skrot = Trasa.new
+
+                  krawedz = @graf.wierzcholki[buf_start.nazwa].krawedzie[@trasa_bufor.trasa_szczegoly[i+1].miasto_docelowe.nazwa]
+                  skrot.dolacz_polaczenie(krawedz.najlepsze_polaczenie(@trasa.trasa_szczegoly.last.przyjazd+@czas_zwiedzania))
+
+
+                  for j in (i+2)..@trasa_bufor.trasa_szczegoly.size-1
+                    skrot.dolacz_polaczenie(@graf.najlepsze_polaczenie(skrot.trasa_szczegoly.last.miasto_docelowe.nazwa, @trasa_bufor.trasa_szczegoly[j].miasto_docelowe.nazwa, skrot.trasa_szczegoly.last.przyjazd+1))
+                  end
+
+                  @trasa_bufor = skrot
+
+                  break
+                end
+              end
+
               @trasa.dolacz_trase(@trasa_bufor)
               @trasa_bufor.wyczysc
+
+
 =begin
               buf_start = @trasa.trasa_szczegoly.last.miasto_docelowe
               puts buf_start
@@ -142,7 +169,7 @@ class Mrowka
                   skrot = Trasa.new
 
                   krawedz = @graf.wierzcholki[buf_start.nazwa].krawedzie[@trasa_bufor.trasa_szczegoly[i+1].miasto_docelowe.nazwa]
-                  skrot.dolacz_polaczenie(krawedz.najlepsze_polaczenie(@trasa.trasa_szczegoly.last.przyjazd+30))
+                  skrot.dolacz_polaczenie(krawedz.najlepsze_polaczenie(@trasa.trasa_szczegoly.last.przyjazd+@czas_zwiedzania))
 
 
                   for j in (i+2)..@trasa_bufor.trasa_szczegoly.size-1
@@ -154,7 +181,7 @@ class Mrowka
                   break
                 end
 =end
-              end
+            end
 
 =begin
               puts '~~~~'
@@ -185,7 +212,7 @@ class Mrowka
               skrot = Trasa.new
               puts @trasa.trasa_szczegoly.last.miasto_docelowe.krawedzie[lista_miast[0].nazwa].nil?
               puts @trasa.trasa_szczegoly.last.miasto_docelowe.nazwa + '----' + lista_miast[0].nazwa
-              skrot.dolacz_polaczenie(@graf.najlepsze_polaczenie(@trasa.trasa_szczegoly.last.miasto_docelowe.nazwa, lista_miast[0].nazwa, @trasa.trasa_szczegoly.last.przyjazd+30))
+              skrot.dolacz_polaczenie(@graf.najlepsze_polaczenie(@trasa.trasa_szczegoly.last.miasto_docelowe.nazwa, lista_miast[0].nazwa, @trasa.trasa_szczegoly.last.przyjazd+@czas_zwiedzania))
 
 
 

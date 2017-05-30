@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get 'algorytm/pokaz_wynik'
   get 'algorytm/index'
 
-  root 'mapa#index'
+  root 'algorytm#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

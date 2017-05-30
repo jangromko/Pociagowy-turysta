@@ -13,12 +13,13 @@ class AlgorytmController < ApplicationController
 
   def pokaz_wynik
 
+    czas_zwiedzania = request.query_parameters['czas_zwiedzania'].to_i
+    miasto_startowe = request.query_parameters['miasto_startowe']
+
     plik = IO.read('/home/jg/Pulpit/rozklad.json')
     rozklad = JSON.parse(plik)
     graf = Graf.new
     graf.utworz_z_jsona(rozklad)
-
-    puts "EH"
 
 
     najlepszy_koszt = 1.0/0
@@ -29,9 +30,9 @@ class AlgorytmController < ApplicationController
     mrowy = []
 
 
-    for j in 0..20
+    for j in 0..15
       for i in 0..20
-        mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf)
+        mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf, czas_zwiedzania)
       end
 
 

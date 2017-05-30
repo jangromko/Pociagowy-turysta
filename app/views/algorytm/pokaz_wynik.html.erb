@@ -30,13 +30,60 @@
     }
 
   </style>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 
-<div id="floating-panel">
-  <input id="przycisk" onclick="pokazWszystkie();" type=button value="Wyczyść">
+<script>
+    function wyrownaj(wartosc)
+    {
+        if (wartosc.length == 1)
+        {
+            wartosc = '0' + wartosc;
+        }
+
+        return wartosc
+    }
+
+
+    function na_ludzki_czas(czas)
+    {
+        var godzina = Math.floor(czas / 60);
+        var minuta = czas % 60;
+
+        return wyrownaj(godzina.toString()) + ':' + wyrownaj(minuta.toString())
+    }
+
+    $.getJSON('http://localhost:3000/algorytm/pobierz_wynik', function (podroz)
+    {
+
+
+        for (var i in podroz)
+        {
+            var li = document.createElement("li");
+            var polaczenie = document.createTextNode('Z: ' + podroz[i]['stacja_poczatkowa'] + ' [' + na_ludzki_czas(podroz[i]['odjazd']) + '] -> do: ' + podroz[i]['stacja_docelowa'] + ' [' + na_ludzki_czas(podroz[i]['przyjazd']) + ']');
+            li.appendChild(polaczenie);
+            document.getElementById("lista").appendChild(li);
+        }
+    });
+</script>
+<div class="w3-col l2 m2 s0">
+  <p></p>
 </div>
+<div class="w3-col l8 m8 s12">
+  <ul id="lista">
+  </ul>
+</div>
+<div class="w3-col l2 m2 s0">
+  <p></p>
+</div>
+
 <div id="mapa"></div>
+
 
 <script>
 
@@ -63,7 +110,7 @@
 
         $.getJSON('http://localhost:3000/algorytm/pobierz_wynik', function (podroz)
         {
-            var plan_podrozy = [{lat: 52.2296756, lng:21.0122287}];
+            var plan_podrozy = [{lat: 52.2296756, lng: 21.0122287}];
 
             for (var i in podroz)
             {
@@ -72,18 +119,15 @@
             }
 
 
-
             var trasa = new google.maps.Polyline({
                 path: plan_podrozy,
                 geodesic: true,
                 strokeColor: '#118822',
-                strokeOpacity: 1.0,
-                strokeWeight: 2
+                strokeOpacity: 0.6,
+                strokeWeight: 5
             });
 
             trasa.setMap(mapa);
-
-
 
 
         });

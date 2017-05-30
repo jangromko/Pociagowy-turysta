@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <title><%= yield :title %> - E-dysk</title>
+  <style>
+    body, h1 {
+      font-family: "Raleway", sans-serif
+    }
+
+    body, html {
+      height: 100%
+    }
+
+    .bgimg {
+      background-image: url('http://dreamatico.com/data_images/railway/railway-1.jpg');
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-middle center">
+    <form action="algorytm/pokaz_wynik.html">
+      <input type="number" name="czas_zwiedzania" min="0" max="1439" default="30" placeholder="Czas na zwiedzanie miasta" class="pole_tekstowe w3-animate-top"/>
+      <select class="pole_tekstowe w3-animate-top" name="miasto_startowe">
+        <option default>Wybierz miasto startowe</option>
+        <option value="Augustów">Augustów</option>
+        <option value="Biała Podlaska">Biała Podlaska</option>
+        <option value="Białystok">Białystok</option>
+        <option value="Bielsk Podlaski">Bielsk Podlaski</option>
+        <option value="Bielsko-Biała">Bielsko-Biała</option>
+        <option value="Bochnia">Bochnia</option>
+        <option value="Brodnica">Brodnica</option>
+        <option value="Brzeg">Brzeg</option>
+        <option value="Bydgoszcz">Bydgoszcz</option>
+        <option value="Chełm">Chełm</option>
+        <option value="Chojnice">Chojnice</option>
+        <option value="Ciechanów">Ciechanów</option>
+        <option value="Częstochowa">Częstochowa</option>
+        <option value="Dębica">Dębica</option>
+        <option value="Elbląg">Elbląg</option>
+        <option value="Ełk">Ełk</option>
+        <option value="Gdańsk">Gdańsk</option>
+        <option value="Gdynia">Gdynia</option>
+        <option value="Gliwice">Gliwice</option>
+        <option value="Gniezno">Gniezno</option>
+        <option value="Gorzów Wielkopolski">Gorzów Wielkopolski</option>
+        <option value="Grajewo">Grajewo</option>
+        <option value="Grudziądz">Grudziądz</option>
+        <option value="Głogów">Głogów</option>
+        <option value="Inowrocław">Inowrocław</option>
+        <option value="Iława">Iława</option>
+        <option value="Jarosław">Jarosław</option>
+        <option value="Jelenia Góra">Jelenia Góra</option>
+        <option value="Kalisz">Kalisz</option>
+        <option value="Katowice">Katowice</option>
+        <option value="Kielce">Kielce</option>
+        <option value="Kluczbork">Kluczbork</option>
+        <option value="Konin">Konin</option>
+        <option value="Kostrzyn nad Odrą">Kostrzyn nad Odrą</option>
+        <option value="Koszalin">Koszalin</option>
+        <option value="Kołobrzeg">Kołobrzeg</option>
+        <option value="Kraków">Kraków</option>
+        <option value="Kędzierzyn-Koźle">Kędzierzyn-Koźle</option>
+        <option value="Kłodzko">Kłodzko</option>
+        <option value="Legionowo">Legionowo</option>
+        <option value="Legnica">Legnica</option>
+        <option value="Leszno">Leszno</option>
+        <option value="Lublin">Lublin</option>
+        <option value="Malbork">Malbork</option>
+        <option value="Namysłów">Namysłów</option>
+        <option value="Nowy Sącz">Nowy Sącz</option>
+        <option value="Nysa">Nysa</option>
+        <option value="Olsztyn">Olsztyn</option>
+        <option value="Opole">Opole</option>
+        <option value="Ostrowiec Świętokrzyski">Ostrowiec Świętokrzyski</option>
+        <option value="Ostrołęka">Ostrołęka</option>
+        <option value="Ostróda">Ostróda</option>
+        <option value="Oświęcim">Oświęcim</option>
+        <option value="Pabianice">Pabianice</option>
+        <option value="Piotrków Trybunalski">Piotrków Trybunalski</option>
+        <option value="Piła">Piła</option>
+        <option value="Poznań">Poznań</option>
+        <option value="Pruszków">Pruszków</option>
+        <option value="Przemyśl">Przemyśl</option>
+        <option value="Puławy">Puławy</option>
+        <option value="Radom">Radom</option>
+        <option value="Radomsko">Radomsko</option>
+        <option value="Rybnik">Rybnik</option>
+        <option value="Rzeszów">Rzeszów</option>
+        <option value="Siedlce">Siedlce</option>
+        <option value="Sieradz">Sieradz</option>
+        <option value="Skarżysko-Kamienna">Skarżysko-Kamienna</option>
+        <option value="Skierniewice">Skierniewice</option>
+        <option value="Sokółka">Sokółka</option>
+        <option value="Sosnowiec">Sosnowiec</option>
+        <option value="Stalowa Wola">Stalowa Wola</option>
+        <option value="Starachowice">Starachowice</option>
+        <option value="Stargard">Stargard</option>
+        <option value="Starogard Gdański">Starogard Gdański</option>
+        <option value="Suwałki">Suwałki</option>
+        <option value="Szczecin">Szczecin</option>
+        <option value="Szczecinek">Szczecinek</option>
+        <option value="Szczytno">Szczytno</option>
+        <option value="Słupsk">Słupsk</option>
+        <option value="Tarnobrzeg">Tarnobrzeg</option>
+        <option value="Tarnów">Tarnów</option>
+        <option value="Tczew">Tczew</option>
+        <option value="Toruń">Toruń</option>
+        <option value="Warszawa">Warszawa</option>
+        <option value="Wałbrzych">Wałbrzych</option>
+        <option value="Wrocław">Wrocław</option>
+        <option value="Włocławek">Włocławek</option>
+        <option value="Włoszczowa">Włoszczowa</option>
+        <option value="Zakopane">Zakopane</option>
+        <option value="Zamość">Zamość</option>
+        <option value="Zielona Góra">Zielona Góra</option>
+        <option value="Jędrzejów">Jędrzejów</option>
+        <option value="Łuków">Łuków</option>
+        <option value="Łódź">Łódź</option>
+        <option value="Świdnica">Świdnica</option>
+        <option value="Świnoujście">Świnoujście</option>
+        <option value="Świebodzin">Świebodzin</option>
+        <option value="Żagań">Żagań</option>
+        <option value="Żary">Żary</option>
+
+
+      </select>
+      <input type="submit" class="przycisk ciemnoczerwony w3-animate-top w3-center" value="Wyznacz trasę"/>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>

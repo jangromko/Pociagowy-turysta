@@ -15,9 +15,9 @@ def atrakcyjnosc_czekanie(x)
 end
 
 def atrakcyjnosc_czas_podrozy(x)
-  1-1/(1+Math.exp((-x)*0.005))
+  # 1-1/(1+Math.exp((-x)*0.005))
 
-  1/(x+0.1)
+  4/(x+0.1)
 end
 
 def nieodwiedzeni_atrakcyjnosc(x)
