@@ -8,4 +8,13 @@ class MapaController < ApplicationController
     json = JSON.parse(plik)
     render json: json
   end
+
+  def czasy
+  end
+
+  def json2
+    plik = IO.read('/home/jg/Pulpit/finalschedule.json')
+    json = JSON.parse(plik)
+    render json: json
+  end
 end

@@ -1,0 +1,2 @@
+module AlgorytmHelper
+end

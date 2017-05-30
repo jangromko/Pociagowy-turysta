@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test json</title>
+  <meta charset='utf-8'>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+  <script >
+      function loadJSON(callback) {
+
+          var xobj = new XMLHttpRequest();
+          xobj.overrideMimeType("application/json");
+          xobj.open('GET', '/mapa/json2', true); // Replace 'my_data' with the path to your file
+          xobj.onreadystatechange = function () {
+              if (xobj.readyState == 4 && xobj.status == "200") {
+                  // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                  callback(xobj.responseText);
+              }
+          };
+          xobj.send(null);
+      }
+
+      function init() {
+          loadJSON(function(response) {
+              // Parse JSON string into object
+              var s;
+              var actual_JSON = JSON.parse(response);
+              console.log(actual_JSON);
+              for(var nazwa_miasta in actual_JSON)
+              {
+
+                  var m=actual_JSON[nazwa_miasta];
+
+                  for(var miasto in m)
+                  {
+                      miasto=m[miasto];
+                      for(var i=0;i<miasto.length;i++)
+                      {
+                          obj=miasto[i];
+                          var departure=obj.departure;
+                          for(var y=0;y<obj.destStations.length;y++)
+                          {
+                              var city=obj.destStations[y].destinationCity;
+                              var arrival=obj.destStations[y].arrival;
+
+                              //oblicznie czasu w minutach
+                              var timeDeparture=(parseInt(departure.substring(0,2))*60)+parseInt(departure.substring(3,5));
+                              var timeArrival=(parseInt(arrival.substring(0,2))*60)+parseInt(arrival.substring(3,5));
+                              var time=timeArrival-timeDeparture;
+                              if(time<0) //przypadek kiedy pociąg wyjeżdża przed północą i dojeżdża po północy
+                                  time=60*24-timeDeparture+timeArrival;
+
+                              obj.destStations[y].time=time;
+
+                          }
+
+                      }
+                  }
+              }
+              console.log(actual_JSON);
+              var myJSON = JSON.stringify(actual_JSON);
+              document.getElementById("demo").innerHTML = myJSON;
+
+          });
+      }
+      $.ready()
+      {
+          init();
+      }
+  </script>
+
+
+
+</head>
+<body>
+<p id="demo"></p>
+<p id="demo2"></p>
+
+</body>
+</html>
