@@ -5,28 +5,14 @@
     #mapa {
       height: 100%;
       width: 100%;
+
+      margin-top: 40px;
     }
 
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-    }
-
-    #floating-panel {
-      position: absolute;
-      margin-top: 20px;
-      left: 90%;
-      z-index: 5;
-      text-align: center;
-      font-family: 'Roboto', 'sans-serif';
-    }
-
-    #przycisk {
-      padding: 10px;
-      background-color: #ffffff;
-      font-size: 1.5rem;
-      border-radius: 8px;
     }
 
   </style>
@@ -75,14 +61,25 @@
   <p></p>
 </div>
 <div class="w3-col l8 m8 s12">
+  <div class="tytul">Wyznaczona trasa:</div>
   <ul id="lista">
   </ul>
+
+  <br/><br/>
+
+  <div class="w3-center">
+    <a href="/" class="przycisk ciemnoczerwony">Powrót do ustawień</a>
+  </div>
+
+  <br/><br/><br/><br/>
 </div>
 <div class="w3-col l2 m2 s0">
   <p></p>
 </div>
 
 <div id="mapa"></div>
+
+
 
 
 <script>
@@ -110,11 +107,13 @@
 
         $.getJSON('http://localhost:3000/algorytm/pobierz_wynik', function (podroz)
         {
-            var plan_podrozy = [{lat: 52.2296756, lng: 21.0122287}];
+            var plan_podrozy = [];
+            var start = {lat: podroz[podroz.length-1]['lat'], lng: podroz[podroz.length-1]['lng']};
+            plan_podrozy.push(start);
 
             for (var i in podroz)
             {
-                var wspolrzedne = {lat: podroz[i]['lat'], lng: podroz[i]['lng']}
+                var wspolrzedne = {lat: podroz[i]['lat'], lng: podroz[i]['lng']};
                 plan_podrozy.push(wspolrzedne)
             }
 

@@ -9,7 +9,6 @@
     padding: 8px;
 
     width: 100%;
-    min-width: 200px;
 }
 
 
@@ -46,4 +45,95 @@
 {
     background-color: #bb2020;
     color: #fffdfd;
+}
+
+
+input[type=radio] {
+    width: 0rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0rem;
+    opacity: 0;
+}
+
+input[type=radio] + label {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+input[type=radio] + label > span {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin: 2px 15px 2px 2px;
+    border: 5px solid #fffdfd;
+    border-radius: 100%;
+    vertical-align: bottom;
+}
+
+input[type=radio]:checked + label > span > span {
+    display: block;
+    width: 11px;
+    height: 11px;
+    margin: 2px;
+    border: 6px solid #fffdfd;
+    border-radius: 100%;
+}
+
+input[type=radio]:hover + label {
+    color: #ffeedd;
+    transition: color .25s linear;
+    -webkit-transition: color .25s linear;
+}
+
+input[type=radio]:hover + label > span {
+    border-color: #ffeedd;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+
+input[type=radio]:hover + label > span > span {
+    border-color: #ffeedd;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+
+.opis
+{
+    font-size: 1.5rem;
+}
+
+.wybor_czasu
+{
+    width: 70px;
+    max-width: 70px;
+
+    margin-top: 25px;
+}
+
+
+a
+{
+  text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
+
+.tytul
+{
+    width: 100%;
+    background-color: #730E15;
+    border-radius: 8px;
+    margin: 20px 5px;
+    color: #fffefe;
+    padding: 15px;
+    font-size: 2.2rem;
 }

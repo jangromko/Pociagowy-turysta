@@ -31,6 +31,22 @@
 
 <body>
 
+<script>
+  function pokaz_wybor_czasu()
+  {
+      var x = document.getElementById("wybor_czasu");
+      if (x.className.indexOf("w3-show") == -1)
+      {
+          x.classList.add("w3-show");
+      }
+  }
+
+  function ukryj_wybor_czasu()
+  {
+      document.getElementById("wybor_czasu").classList.remove("w3-show");
+  }
+</script>
+
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
   <div class="w3-display-middle center">
     <form action="algorytm/pokaz_wynik.html">
@@ -139,6 +155,18 @@
 
 
       </select>
+      <div class="w3-center w3-animate-top">
+        <p class="opis">Czy chesz wybrać czas rozpoczęcia wycieczki?</p>
+        <input id="czas_nie" type="radio" value="nie" name="wybierz_czas" checked="true" onclick="ukryj_wybor_czasu()"/><label for="czas_nie"><span><span></span></span>Nie</label>
+        <input id="czas_tak" type="radio" value="tak" name="wybierz_czas" onclick="pokaz_wybor_czasu()"/><label for="czas_tak"><span><span></span></span>Tak</label>
+      </div>
+
+      <div id="wybor_czasu" class="w3-center w3-hide">
+        <input type="number" class="wybor_czasu pole_tekstowe" name="godzina" min="0" max="23" placeholder="HH">
+        <input type="number" class="pole_tekstowe wybor_czasu" name="minuta" min="0" max="59" placeholder="MM">
+      </div>
+
+
       <input type="submit" class="przycisk ciemnoczerwony w3-animate-top w3-center" value="Wyznacz trasę"/>
     </form>
   </div>

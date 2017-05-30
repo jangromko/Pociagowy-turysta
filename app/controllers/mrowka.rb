@@ -3,7 +3,7 @@ load 'trasa.rb'
 
 class Mrowka
 
-  def initialize(start, rozmiar_grafu, graf, czas_zwiedzania)
+  def initialize(start, rozmiar_grafu, graf, czas_zwiedzania, czas_start=rand(0..1439))
     @start = start
     # @trasa = []
     # @trasa_ogolna = []
@@ -15,7 +15,7 @@ class Mrowka
     @status = 0
     @koszt = 0
     @graf = graf
-    @aktualny_czas = rand(0..1439)
+    @aktualny_czas = czas_start
     # @aktualny_czas = 0
     @r = Random.new
     @trasa_bufor = Trasa.new

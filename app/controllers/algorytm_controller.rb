@@ -15,6 +15,16 @@ class AlgorytmController < ApplicationController
 
     czas_zwiedzania = request.query_parameters['czas_zwiedzania'].to_i
     miasto_startowe = request.query_parameters['miasto_startowe']
+    wybor_czasu = request.query_parameters['wybierz_czas']
+
+    sztywne_ustawienia = false
+
+    if wybor_czasu == 'tak'
+      godzina = request.query_parameters['godzina'].to_i
+      minuta = request.query_parameters['minuta'].to_i
+      czas_start = godzina*60+minuta
+      sztywne_ustawienia = true
+    end
 
     plik = IO.read('/home/jg/Pulpit/rozklad.json')
     rozklad = JSON.parse(plik)
@@ -30,10 +40,18 @@ class AlgorytmController < ApplicationController
     mrowy = []
 
 
-    for j in 0..15
-      for i in 0..20
-        mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf, czas_zwiedzania)
+    for j in 0..1
+
+      if sztywne_ustawienia
+        for i in 0..20
+          mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_start)
+        end
+      else
+        for i in 0..20
+          mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf, czas_zwiedzania)
+        end
       end
+
 
 
       mrowy.each do |mrowa|
