@@ -2,14 +2,16 @@
 <html>
 <head>
   <style>
-    #mapa {
+    #mapa
+    {
       height: 100%;
       width: 100%;
 
       margin-top: 40px;
     }
 
-    html, body {
+    html, body
+    {
       height: 100%;
       margin: 0;
       padding: 0;
@@ -50,10 +52,37 @@
 
         for (var i in podroz)
         {
-            var li = document.createElement("li");
-            var polaczenie = document.createTextNode('Z: ' + podroz[i]['stacja_poczatkowa'] + ' [' + na_ludzki_czas(podroz[i]['odjazd']) + '] -> do: ' + podroz[i]['stacja_docelowa'] + ' [' + na_ludzki_czas(podroz[i]['przyjazd']) + '], pociąg: ' + podroz[i]['pociag']);
-            li.appendChild(polaczenie);
-            document.getElementById("lista").appendChild(li);
+          /*var li = document.createElement("li");
+           var polaczenie = document.createTextNode('Z: ' + podroz[i]['stacja_poczatkowa'] + ' [' + na_ludzki_czas(podroz[i]['odjazd']) + '] -> do: ' + podroz[i]['stacja_docelowa'] + ' [' + na_ludzki_czas(podroz[i]['przyjazd']) + '], pociąg: ' + podroz[i]['pociag']);
+           li.appendChild(polaczenie);
+           document.getElementById("lista").appendChild(li);*/
+
+            var tr_polaczenie = document.createElement("tr");
+            var td_skad = document.createElement("td");
+            var td_dokad = document.createElement("td");
+            var td_odjazd = document.createElement("td");
+            var td_przyjazd = document.createElement("td");
+            var td_pociag = document.createElement("td");
+
+            var skad = document.createTextNode(podroz[i]['stacja_poczatkowa']);
+            var dokad = document.createTextNode(podroz[i]['stacja_docelowa']);
+            var odjazd = document.createTextNode(na_ludzki_czas(podroz[i]['odjazd']));
+            var przyjazd = document.createTextNode(na_ludzki_czas(podroz[i]['przyjazd']));
+            var pociag = document.createTextNode(podroz[i]['pociag']);
+
+            td_skad.appendChild(skad);
+            td_dokad.appendChild(dokad);
+            td_odjazd.appendChild(odjazd);
+            td_przyjazd.appendChild(przyjazd);
+            td_pociag.appendChild(pociag);
+
+            tr_polaczenie.appendChild(td_skad);
+            tr_polaczenie.appendChild(td_dokad);
+            tr_polaczenie.appendChild(td_odjazd);
+            tr_polaczenie.appendChild(td_przyjazd);
+            tr_polaczenie.appendChild(td_pociag);
+
+            document.getElementById("tabela").appendChild(tr_polaczenie);
         }
     });
 </script>
@@ -61,9 +90,21 @@
   <p></p>
 </div>
 <div class="w3-col l8 m8 s12">
-  <div class="tytul">Wyznaczona trasa (<%= IO.read('/home/jg/Pulpit/wynik_koszt')%>):</div>
+  <div class="tytul">Wyznaczona trasa – <%= IO.read('/home/jg/Pulpit/wynik_koszt')%></div>
+  <!--
   <ul id="lista">
   </ul>
+  -->
+
+  <table id="tabela">
+    <tr>
+      <th>Ze stacji</th>
+      <th>Do stacji</th>
+      <th>Czas odjazdu</th>
+      <th>Czas przyjazdu</th>
+      <th>Pociąg</th>
+    </tr>
+  </table>
 
   <br/><br/>
 
@@ -78,8 +119,6 @@
 </div>
 
 <div id="mapa"></div>
-
-
 
 
 <script>
@@ -108,7 +147,7 @@
         $.getJSON('http://localhost:3000/algorytm/pobierz_wynik', function (podroz)
         {
             var plan_podrozy = [];
-            var start = {lat: podroz[podroz.length-1]['lat'], lng: podroz[podroz.length-1]['lng']};
+            var start = {lat: podroz[podroz.length - 1]['lat'], lng: podroz[podroz.length - 1]['lng']};
             plan_podrozy.push(start);
 
             for (var i in podroz)

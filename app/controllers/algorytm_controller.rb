@@ -40,14 +40,14 @@ class AlgorytmController < ApplicationController
     mrowy = []
 
 
-    for j in 0..30
+    for j in 0..0
 
       if sztywne_ustawienia
-        for i in 0..50
+        for i in 0..0
           mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_start)
         end
       else
-        for i in 0..50
+        for i in 0..0
           mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf, czas_zwiedzania)
         end
       end

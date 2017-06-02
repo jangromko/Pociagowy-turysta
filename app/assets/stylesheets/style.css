@@ -140,5 +140,33 @@ a:hover
 
 #czekanie
 {
-    font-size: 5rem;
+    font-size: 10rem;
+}
+
+
+table
+{
+    border-collapse: collapse;
+    width: 99%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+th
+{
+    border-bottom: 3px solid #730E15;
+    text-align: left;
+    padding: 8px !important;
+}
+
+td
+{
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px !important;
+}
+
+tr:nth-child(even)
+{
+    background-color: #fffafa;
 }
