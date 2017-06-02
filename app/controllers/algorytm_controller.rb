@@ -40,14 +40,14 @@ class AlgorytmController < ApplicationController
     mrowy = []
 
 
-    for j in 0..20
+    for j in 0..30
 
       if sztywne_ustawienia
-        for i in 0..20
+        for i in 0..50
           mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_start)
         end
       else
-        for i in 0..20
+        for i in 0..50
           mrowy[i] = Mrowka.new(graf.wierzcholki['Warszawa'], 99, graf, czas_zwiedzania)
         end
       end
@@ -60,34 +60,39 @@ class AlgorytmController < ApplicationController
 
 
       suma = 0
+      sukcesy = 0
       mrowy.each do |mrowa|
-        if mrowa.koszt < najlepszy_koszt
-          najlepszy_koszt = mrowa.koszt
-          najlepsza_trasa = mrowa.trasa
-          kiedy_znaleziona = j
+        if mrowa.status == 1
+          sukcesy += 1
+          if mrowa.koszt < najlepszy_koszt
+            najlepszy_koszt = mrowa.koszt
+            najlepsza_trasa = mrowa.trasa
+            kiedy_znaleziona = j
 
+          end
+          print mrowa.koszt
+          print ':'
+          print mrowa.trasa.trasa_szczegoly.size
+          print '+'
+          print mrowa.trasa.powrotna_trasa_szczegoly.size
+          print ' '
+          suma += mrowa.koszt
         end
-        print mrowa.koszt
-        print ':'
-        print mrowa.trasa.trasa_szczegoly.size
-        print '+'
-        print mrowa.trasa.powrotna_trasa_szczegoly.size
-        print ' '
-        suma += mrowa.koszt
       end
 
-      puts ''
+      if sukcesy > 0
+        puts ''
 
-      puts '–––––––––––––––––––'
-      puts j
-      print 'ŚREDNIA: '
-      puts suma/mrowy.size
-      print 'NAJLEPSZY: '
-      puts najlepszy_koszt
-      puts '–––––––––––––––––––'
+        puts '–––––––––––––––––––'
+        puts j
+        print 'ŚREDNIA: '
+        puts suma/sukcesy
+        print 'NAJLEPSZY: '
+        puts najlepszy_koszt
+        puts '–––––––––––––––––––'
+      end
 
-
-      if najlepszy_koszt < czas_zwiedzania*99+28000
+      if najlepszy_koszt < czas_zwiedzania*99+27000
         break
       end
 
@@ -95,9 +100,11 @@ class AlgorytmController < ApplicationController
       graf.odparuj(0.05)
 
       mrowy.each do |mrowa|
-        mrowa.trasa.trasa_ogolna do |krawedz|
-          krawedz.dodaj_feromon(sigmoidalna_rozmiar(mrowa.trasa.trasa_szczegoly.size), 0.01)
-          krawedz.dodaj_feromon(sigmoidalna_koszt(mrowa.koszt), 2)
+        if mrowa.status == 1
+          mrowa.trasa.trasa_ogolna do |krawedz|
+            krawedz.dodaj_feromon(sigmoidalna_rozmiar(mrowa.trasa.trasa_szczegoly.size), 0.01)
+            krawedz.dodaj_feromon(sigmoidalna_koszt(mrowa.koszt), 2)
+          end
         end
       end
 

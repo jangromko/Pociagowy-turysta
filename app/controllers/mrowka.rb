@@ -26,7 +26,7 @@ class Mrowka
     @sasiedzi_do_odwiedzenia = {}
     graf.wierzcholki.each_key do |w|
       @wierzcholki.push(graf.wierzcholki[w])
-      @sasiedzi_do_odwiedzenia[w] = graf.wierzcholki[w].sasiedzi.size
+      #@sasiedzi_do_odwiedzenia[w] = graf.wierzcholki[w].sasiedzi.size
     end
   end
 
@@ -107,11 +107,11 @@ class Mrowka
           @aktualny_czas = dodaj_do_czasu(@aktualny_czas, dodatek_na_przesiadke)
           @obecny_wierzcholek = kandydat.miasto_docelowe
 
-          @wierzcholki.each do |w|
-            if w.sasiedzi.include? @obecny_wierzcholek and !(@odwiedzone.include? @obecny_wierzcholek)
-              @sasiedzi_do_odwiedzenia[w.nazwa] -= 1
-            end
-          end
+          #@wierzcholki.each do |w|
+          #  if w.sasiedzi.include? @obecny_wierzcholek and !(@odwiedzone.include? @obecny_wierzcholek)
+          #    @sasiedzi_do_odwiedzenia[w.nazwa] -= 1
+          #  end
+          #end
 
           @obecna_stacja = kandydat.stacja_docelowa
           # @trasa.push(kandydat)
@@ -247,17 +247,22 @@ class Mrowka
 
       @obecny_wierzcholek.krawedzie.each_key do |krawedz|
         # atrakcyjnosc = @obecny_wierzcholek.krawedzie[krawedz].zapach
+        polaczenie = @obecny_wierzcholek.krawedzie[krawedz].najlepsze_polaczenie(@aktualny_czas)
         atrakcyjnosc = 1.0
         if @obecny_wierzcholek.krawedzie[krawedz].miasto_docelowe == @start
           atrakcyjnosc *= 500.0
+        elsif @obecny_wierzcholek.krawedzie[krawedz].miasto_docelowe.sasiedzi.include? @start
+          atrakcyjnosc *= 200
         end
 
         if @obecny_wierzcholek.krawedzie[krawedz].miasto_docelowe == @obecny_wierzcholek
           atrakcyjnosc /= 100.0
         end
 
+        atrakcyjnosc *= atrakcyjnosc_czas_podrozy(polaczenie.czas)
+
         suma_atrakcyjnosci += atrakcyjnosc
-        kandydaci[@obecny_wierzcholek.krawedzie[krawedz].najlepsze_polaczenie(@aktualny_czas)] = atrakcyjnosc
+        kandydaci[polaczenie] = atrakcyjnosc
       end
 
 
@@ -311,20 +316,30 @@ class Mrowka
   def wykonaj_pelna_trase
     until @status == 1
       idz_dalej
+
+      if @trasa.trasa_szczegoly.size > 220
+        @trasa.wyczysc
+        @status = 2
+        break
+      end
       #puts @sasiedzi_do_odwiedzenia.to_s
     end
 
-    if @trasa_bufor.trasa_szczegoly.size == 1
-      @trasa.dolacz_trase(@trasa_bufor)
-      @trasa_bufor.wyczysc
-    else
-      @trasa.dolacz_trase(@trasa_bufor)
-      @trasa_bufor.wyczysc
-    end
+    if @status == 1
+      if @trasa_bufor.trasa_szczegoly.size == 1
+        @trasa.dolacz_trase(@trasa_bufor)
+        @trasa_bufor.wyczysc
+      else
+        @trasa.dolacz_trase(@trasa_bufor)
+        @trasa_bufor.wyczysc
+      end
 
-    @koszt = @trasa.wylicz_czas(@trasa.trasa_szczegoly[0].odjazd, 0, @trasa.trasa_szczegoly.size-1)
+      @koszt = @trasa.wylicz_czas_caly
+    else
+      @koszt = 1.0/0
+    end
   end
 
 
-  attr_reader :obecny_wierzcholek, :trasa, :odwiedzone, :koszt
+  attr_reader :obecny_wierzcholek, :trasa, :odwiedzone, :koszt, :status
 end

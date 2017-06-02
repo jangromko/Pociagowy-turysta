@@ -65,6 +65,30 @@ class Trasa
     wynik
   end
 
+
+  def wylicz_czas_caly
+    if @trasa_szczegoly.size > 0
+      wynik = @trasa_szczegoly[0].czas
+      czas = @trasa_szczegoly[0].przyjazd
+
+      for i in 1..@trasa_szczegoly.size-1
+        wynik += roznica_czasu(czas, @trasa_szczegoly[i].odjazd)
+        wynik += @trasa_szczegoly[i].czas
+        czas = @trasa_szczegoly[i].przyjazd
+      end
+
+      for i in 0..@powrotna_trasa_szczegoly.size-1
+        wynik += roznica_czasu(czas, @powrotna_trasa_szczegoly[i].odjazd)
+        wynik += powrotna_trasa_szczegoly[i].czas
+        czas = powrotna_trasa_szczegoly[i].przyjazd
+      end
+
+      wynik
+    end
+
+  end
+
+
   def wyczysc
     @trasa_ogolna = Set.new
     @trasa_szczegoly = []
