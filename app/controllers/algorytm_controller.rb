@@ -16,6 +16,8 @@ class AlgorytmController < ApplicationController
     czas_zwiedzania = request.query_parameters['czas_zwiedzania'].to_i
     miasto_startowe = request.query_parameters['miasto_startowe']
     wybor_czasu = request.query_parameters['wybierz_czas']
+    czas_na_przesiadke = request.query_parameters['czas_na_przesiadke'].to_i
+    przesiadka_inna_stacja = request.query_parameters['inna_stacja'].to_i
 
     sztywne_ustawienia = false
 
@@ -44,11 +46,11 @@ class AlgorytmController < ApplicationController
 
       if sztywne_ustawienia
         for i in 0..30
-          mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_start)
+          mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_na_przesiadke, przesiadka_inna_stacja, czas_start)
         end
       else
         for i in 0..30
-          mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania)
+          mrowy[i] = Mrowka.new(graf.wierzcholki[miasto_startowe], 99, graf, czas_zwiedzania, czas_na_przesiadke, przesiadka_inna_stacja)
         end
       end
 
@@ -59,44 +61,16 @@ class AlgorytmController < ApplicationController
       end
 
 
-      suma = 0
-      sukcesy = 0
       mrowy.each do |mrowa|
         if mrowa.status == 1
-          sukcesy += 1
           if mrowa.koszt < najlepszy_koszt
             najlepszy_koszt = mrowa.koszt
             najlepsza_trasa = mrowa.trasa
             kiedy_znaleziona = j
-
           end
-          print mrowa.koszt
-          print ':'
-          print mrowa.trasa.trasa_szczegoly.size
-          print '+'
-          print mrowa.trasa.powrotna_trasa_szczegoly.size
-          print ' '
-          suma += mrowa.koszt
         end
       end
 
-      if sukcesy > 0
-        puts ''
-
-        puts '–––––––––––––––––––'
-        puts j
-        print 'ŚREDNIA: '
-        puts suma/sukcesy
-        print 'NAJLEPSZY: '
-        puts najlepszy_koszt
-        puts '–––––––––––––––––––'
-      end
-
-      if najlepszy_koszt < czas_zwiedzania*99+26000
-        break
-      end
-
-#=begin
       graf.odparuj(0.05)
 
       mrowy.each do |mrowa|
@@ -112,7 +86,8 @@ class AlgorytmController < ApplicationController
         krawedz.dodaj_feromon(sigmoidalna_rozmiar(najlepsza_trasa.trasa_szczegoly.size), 0.01)
         krawedz.dodaj_feromon(sigmoidalna_koszt(najlepszy_koszt), 2)
       end
-#=end
+
+      puts j
     end
 
 

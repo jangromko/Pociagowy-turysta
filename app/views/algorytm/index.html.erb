@@ -54,9 +54,12 @@
 </script>
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-middle center">
+  <div class="w3-display-middle center  w3-col l4 m8 s10">
     <form action="algorytm/pokaz_wynik.html" id="formularz">
-      <input type="number" name="czas_zwiedzania" min="0" max="1439" default="30" placeholder="Czas na zwiedzanie miasta" class="pole_tekstowe w3-animate-top"/>
+      <input type="number" name="czas_zwiedzania" min="0" max="1439" placeholder="Czas na zwiedzanie miasta" class="pole_tekstowe w3-animate-top"/>
+      <input type="number" name="czas_na_przesiadke" min="0" max="1439" placeholder="Czas na przesiadkę" class="pole_tekstowe w3-animate-top"/>
+      <input type="number" name="inna_stacja" min="0" max="1439" placeholder="Czas na przesiadkę na innej stacji" class="pole_tekstowe w3-animate-top"/>
+
       <select class="pole_tekstowe w3-animate-top" name="miasto_startowe">
         <option default>Wybierz miasto startowe</option>
         <option value="Augustów">Augustów</option>
@@ -109,7 +112,7 @@
         <option value="Olsztyn">Olsztyn</option>
         <option value="Opole">Opole</option>
         <option value="Ostrowiec Świętokrzyski">Ostrowiec Świętokrzyski</option>
-        <option value="Ostrołęka">Ostrołęka</option>
+        <!--<option value="Ostrołęka">Ostrołęka</option>-->
         <option value="Ostróda">Ostróda</option>
         <option value="Oświęcim">Oświęcim</option>
         <option value="Pabianice">Pabianice</option>
@@ -175,10 +178,12 @@
 
       <input type="submit" class="przycisk ciemnoczerwony w3-animate-top w3-center" onclick="czekanie()" value="Wyznacz trasę"/>
     </form>
-
-    <i class="fa fa-cog fa-spin fa-3x fa-fw w3-hide" id="czekanie"></i>
-    <span class="sr-only">Trwa wyznaczanie trasy...</span>
   </div>
+</div>
+
+<div class="w3-display-middle center w3-text-white">
+  <i class="fa fa-cog fa-spin fa-3x fa-fw w3-hide center" id="czekanie"></i>
+  <span class="sr-only">Trwa wyznaczanie trasy...</span>
 </div>
 
 </body>
