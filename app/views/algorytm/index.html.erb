@@ -32,25 +32,25 @@
 <body>
 
 <script>
-  function pokaz_wybor_czasu()
-  {
-      var x = document.getElementById("wybor_czasu");
-      if (x.className.indexOf("w3-show") == -1)
-      {
-          x.classList.add("w3-show");
-      }
-  }
+    function pokaz_wybor_czasu()
+    {
+        var x = document.getElementById("wybor_czasu");
+        if (x.className.indexOf("w3-show") == -1)
+        {
+            x.classList.add("w3-show");
+        }
+    }
 
-  function ukryj_wybor_czasu()
-  {
-      document.getElementById("wybor_czasu").classList.remove("w3-show");
-  }
+    function ukryj_wybor_czasu()
+    {
+        document.getElementById("wybor_czasu").classList.remove("w3-show");
+    }
 
-  function czekanie()
-  {
-      document.getElementById("formularz").classList.add("w3-hide");
-      document.getElementById("czekanie").classList.remove("w3-hide");
-  }
+    function czekanie()
+    {
+        document.getElementById("formularz").classList.add("w3-hide");
+        document.getElementById("czekanie").classList.remove("w3-hide");
+    }
 </script>
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
@@ -168,8 +168,8 @@
       </div>
 
       <div id="wybor_czasu" class="w3-center w3-hide">
-        <input type="number" class="wybor_czasu pole_tekstowe" name="godzina" min="0" max="23" placeholder="HH">
-        <input type="number" class="pole_tekstowe wybor_czasu" name="minuta" min="0" max="59" placeholder="MM">
+        <input id="godziny" type="number" class="wybor_czasu pole_tekstowe" name="godzina" min="0" max="23" placeholder="HH">
+        <input id="minuty" type="number" class="pole_tekstowe wybor_czasu" name="minuta" min="0" max="59" placeholder="MM">
       </div>
 
 

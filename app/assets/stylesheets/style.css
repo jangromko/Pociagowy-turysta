@@ -30,9 +30,10 @@
     transition-duration: 0.4s;
 }
 
-.przycisk:hover
+.przycisk:hover, .przycisk:focus
 {
     cursor: hand;
+    text-decoration: none;
 }
 
 .ciemnoczerwony
